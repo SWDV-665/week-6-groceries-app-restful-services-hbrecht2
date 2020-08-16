@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {NavController} from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { GroceriesServiceService } from '../groceries-service.service';
@@ -15,7 +16,7 @@ export class Tab1Page {
   items = [];
   errorMessage: string;
 
-  constructor(public toastController: ToastController, public alertController: AlertController, public dataService: GroceriesServiceService, public inputDialogService: InputDialogService, public socialSharing: SocialSharing) {
+  constructor(public navCtrl: NavController, public toastController: ToastController, public alertController: AlertController, public dataService: GroceriesServiceService, public inputDialogService: InputDialogService, public socialSharing: SocialSharing) {
     dataService.dataChanged$.subscribe((dataChanged: boolean)=>{
       this.loadItems();
     });
@@ -28,7 +29,7 @@ export class Tab1Page {
   loadItems() {
     this.dataService.getItems()
     .subscribe(
-      items => this.items = items, 
+      items => this.items = items,
       error => this.errorMessage = <any>error);
   }
 
